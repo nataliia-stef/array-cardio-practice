@@ -78,10 +78,8 @@ const people = [
   'Becker, Carl',
   'Beckett, Samuel',
   'Beddoes, Mick',
-  'Beecher',
-  'Henry',
-  'Beethoven',
-  'Ludwig',
+  'Beecher, Henry',
+  'Beethoven, Ludwig',
   'Begin, Menachem',
   'Belloc, Hilaire',
   'Bellow, Saul',
@@ -108,20 +106,15 @@ const people = [
   'Bevan, Aneurin',
   'Bevel, Ken',
   'Biden, Joseph',
-  'Bierce',
-  'Ambrose',
-  'Biko',
-  'Steve',
+  'Bierce, Ambrose',
+  'Biko, Steve',
   'Billings, Josh',
   'Biondo, Frank',
   'Birrell, Augustine',
-  'Black, Elk',
-  'Blair',
-  'Robert',
-  'Blair',
-  'Tony',
-  'Blake',
-  'William'
+  'Black Elk',
+  'Blair, Robert',
+  'Blair, Tony',
+  'Blake, William'
 ];
 
 // Array.prototype.filter() // 1. Filter the list of inventors for those who were born in the 1500's
@@ -140,16 +133,37 @@ console.log(inventorsName);
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
-const sortedInventors = inventors.sort((a, b) => b.year - a.year);
+const sortedInventors = inventors.sort((a, b) => a.year - b.year);
 console.log(sortedInventors);
+
+// other way to sort
+// const sortedInventors = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
+const allYears = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+}, 0);
+console.log(allYears);
 
 // 5. Sort the inventors by years lived
+const yearsLived = inventors.sort(
+  (a, b) => (a.passed - a.year > b.passed - b.year ? 1 : -1)
+);
+console.log(yearsLived);
 
 // 6. create a list of Boulevards in Paris that contain 'de ' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+const category = document.querySelector('.mw-category');
+const links = category.querySelectorAll('a');
+
+const myArray = Array.from(links);
+
+const namewWithDe = myArray
+  .map(link => link.textContent)
+  .filter(name => name.includes('de'));
+
+console.log(namewWithDe);
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
